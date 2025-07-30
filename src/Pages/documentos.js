@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../component/sidebar';
 import UserHeader from '../component/usuario';
-//import News from '../component/news';
+import Recursos from '../component/recursos';
 import Cumple from '../component/cumple';
-//import Atajos from '../component/atajos';
 import '../Style/documentos.modules.css';
 
 function Docs() {
@@ -29,8 +28,7 @@ function Docs() {
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className={`main-content ${collapsed ? "collapsed" : ""}`}>
         <UserHeader collapsed={collapsed} />
-        {/*<News collapsed={collapsed} />*/}
-        {/*<Atajos collapsed={collapsed}/>*/}      
+        {<Recursos collapsed={collapsed} />}     
         <Cumple collapsed={collapsed} />
       </div>
     </div>
