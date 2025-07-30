@@ -1,7 +1,9 @@
 .user-header {
-  background-color: #f9fafb;
+  background-color: #d53838;
   padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #201f1f;
   transition: margin-left 0.3s;
+  color: rgb(242, 233, 233);
+  border: 3px solid black ;
 }
 

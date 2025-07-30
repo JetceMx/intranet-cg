@@ -1,6 +1,7 @@
 .cumple-header {
-  background-color: #f9fafb;
+  background-color: #f4f0f0;
   padding: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid #c0c1c5;
   transition: margin-left 0.3s;
+  color: #d53838;
 }

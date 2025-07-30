@@ -24,7 +24,9 @@
 }
 
 .logo {
-  font-size: 1.2rem;
+  width: 80px;;
+  height: 80px;
+  object-fit: cover;
 }
 
 .toggle-btn {

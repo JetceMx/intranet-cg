@@ -1,5 +1,6 @@
 import { Home, FileText, LogOut, Menu, HatGlasses, Handshake } from "lucide-react";
 import "../Style/sidebar.modules.css";
+import Carnes from "../imgs/Carnes G.png"
 
 // 4 - Codigo
 
@@ -15,7 +16,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
   return (
     <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <div className="sidebar-header">
-        {!collapsed && <h1 className="logo">Mi App</h1>}
+        {!collapsed && <img src={Carnes} alt="Logo" className="logo"/>}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="toggle-btn"

@@ -3,6 +3,7 @@ import Sidebar from '../component/sidebar';
 import UserHeader from '../component/usuario';
 import News from '../component/news';
 import Cumple from '../component/cumple';
+import Atajos from '../component/atajos';
 import '../Style/home.modules.css';
 
 function Home() {
@@ -30,6 +31,7 @@ function Home() {
       <div className={`main-content ${collapsed ? "collapsed" : ""}`}>
         <UserHeader collapsed={collapsed} />
         <News collapsed={collapsed} />
+        <Atajos collapsed={collapsed}/>        
         <Cumple collapsed={collapsed} />
       </div>
     </div>
