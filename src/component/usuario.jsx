@@ -1,0 +1,39 @@
+import React, { useEffect, useState } from 'react';
+import '../Style/usuario.modules.css';
+
+// 5 - Codigo
+
+const frasesMotivacionales = [
+  "¡Hoy es un buen día para aprender algo nuevo!",
+  "Recuerda: cada paso te acerca a tu meta.",
+  "El esfuerzo de hoy es el éxito de mañana.",
+  "Confía en tu proceso.",
+  "No te rindas, lo mejor está por venir.",
+];
+
+function getSaludoPorHora() {
+  const hora = new Date().getHours();
+  if (hora < 12) return "Buenos días";
+  if (hora < 18) return "Buenas tardes";
+  return "Buenas noches";
+}
+
+export default function UserHeader({ collapsed }) {
+  const [frase, setFrase] = useState("");
+  const [saludo, setSaludo] = useState("");
+
+  useEffect(() => {
+    setSaludo(getSaludoPorHora());
+    const aleatorio = frasesMotivacionales[Math.floor(Math.random() * frasesMotivacionales.length)];
+    setFrase(aleatorio);
+  }, []);
+
+  return (
+    <header className={`user-header ${collapsed ? "collapsed" : ""}`}>
+      <div>
+        <h2>{saludo}</h2>
+        <p className="motivacion">{frase}</p>
+      </div>
+    </header>
+  );
+}

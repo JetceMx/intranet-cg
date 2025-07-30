@@ -1,31 +1,17 @@
-import { useState, useEffect } from "react";
-import { Home, FileText, LogOut, Menu } from "lucide-react";
+import { Home, FileText, LogOut, Menu, HatGlasses, Handshake } from "lucide-react";
 import "../Style/sidebar.modules.css";
+
+// 4 - Codigo
 
 const navItems = [
   { icon: <Home size={20} />, label: "Inicio" },
-  { icon: <FileText size={20} />, label: "Mis Solicitudes" },
+  { icon: <FileText size={20} />, label: "Documentos" },
+  { icon: <Handshake size={20} />, label: "Mis Solicitudes" },
+  { icon: <HatGlasses size={20}/>, label: "Denuncias"},
+
 ];
 
-export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
-
-  // Colapsar automáticamente en pantallas pequeñas
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setCollapsed(true);
-      } else {
-        setCollapsed(false);
-      }
-    };
-
-    handleResize(); // Inicial
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+export default function Sidebar({ collapsed, setCollapsed }) {
   return (
     <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <div className="sidebar-header">
