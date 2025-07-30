@@ -1,22 +1,21 @@
 import { Home, FileText, LogOut, Menu, HatGlasses, Handshake } from "lucide-react";
 import "../Style/sidebar.modules.css";
-import Carnes from "../imgs/Carnes G.png"
+import Carnes from "../imgs/Carnes G.png";
+import { NavLink } from "react-router-dom";
 
-// 4 - Codigo
-
+// Enlaces de navegación
 const navItems = [
-  { icon: <Home size={20} />, label: "Inicio" },
-  { icon: <FileText size={20} />, label: "Documentos" },
-  { icon: <Handshake size={20} />, label: "Mis Solicitudes" },
-  { icon: <HatGlasses size={20}/>, label: "Denuncias"},
-
+  { icon: <Home size={20} />, label: "Inicio", link: '/' },
+  { icon: <FileText size={20} />, label: "Documentos", link: "/documentos" },
+  { icon: <Handshake size={20} />, label: "Mis Solicitudes", link: "/solicitudes" },
+  { icon: <HatGlasses size={20} />, label: "Denuncias", link: "/denuncias" },
 ];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
   return (
     <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <div className="sidebar-header">
-        {!collapsed && <img src={Carnes} alt="Logo" className="logo"/>}
+        {!collapsed && <img src={Carnes} alt="Logo" className="logo" />}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="toggle-btn"
@@ -28,10 +27,16 @@ export default function Sidebar({ collapsed, setCollapsed }) {
 
       <nav className="sidebar-nav">
         {navItems.map((item, i) => (
-          <div className="nav-item" key={i}>
+          <NavLink
+            to={item.link}
+            key={i}
+            className={({ isActive }) =>
+              `nav-item ${isActive ? "active" : ""}`
+            }
+          >
             {item.icon}
             {!collapsed && <span>{item.label}</span>}
-          </div>
+          </NavLink>
         ))}
       </nav>
 

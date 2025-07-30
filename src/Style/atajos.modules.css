@@ -84,6 +84,24 @@
   color: #444;
 }
 
+.download-btn {
+  display: inline-block;
+  margin-bottom: 1rem;
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.download-btn:hover {
+  background-color: #0056b3;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

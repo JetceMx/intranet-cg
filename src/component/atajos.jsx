@@ -27,6 +27,8 @@ function Atajos() {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // 9 - Codigo
+
   const openModal = async (shortcut) => {
     setLoading(true);
     setActiveShortcut(shortcut);
@@ -46,6 +48,27 @@ function Atajos() {
     setActiveShortcut(null);
     setContent("");
   };
+
+  // 10 - Codigo
+
+  const downloadFile = async (url, filename) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      alert("No se pudo descargar el archivo.");
+      console.error(error);
+    }
+  };
+
+  // 11 - Codigo
 
   return (
     <div className="quick-links-container">
@@ -68,6 +91,18 @@ function Atajos() {
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={closeModal}>×</button>
             <h3>{activeShortcut.title}</h3>
+
+            <div className="modal-actions">
+              <button
+                className="download-btn"
+                onClick={() =>
+                  downloadFile(activeShortcut.file, `${activeShortcut.title}.txt`)
+                }
+              >
+                Descargar archivo
+              </button>
+            </div>
+
             {loading ? (
               <p>Cargando contenido...</p>
             ) : (
@@ -81,4 +116,3 @@ function Atajos() {
 }
 
 export default Atajos;
-
