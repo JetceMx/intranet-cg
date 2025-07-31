@@ -1,7 +1,12 @@
 .cumple-header {
-  background-color: #f4f0f0;
+  background-color: #e03535;
   padding: 1.5rem;
   border-bottom: 1px solid #c0c1c5;
   transition: margin-left 0.3s;
-  color: #d53838;
+  color: #f4f0f0;
+}
+
+.motivaciones{
+  color: rgb(255, 255, 255);
+  font-size: 14px;
 }

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {FileUser, BookOpenText, UserStar} from "lucide-react";
 import "../Style/atajos.modules.css";
 
 const shortcuts = [
@@ -7,18 +8,21 @@ const shortcuts = [
     title: "Políticas",
     description: "Consulta las políticas internas y lineamientos.",
     file: "/docs/politicas.txt",
+    icon: <FileUser className="icon" />,
   },
   {
     id: 2,
     title: "Reglamento",
     description: "Revisa el reglamento general vigente.",
     file: "/docs/reglamentos.txt",
+    icon: <BookOpenText className="icon" />,
   },
   {
     id: 3,
     title: "Reconocimientos",
     description: "Conoce a los empleados destacados.",
     file: "/docs/reconocimientos.txt",
+    icon: <UserStar className="icon" />,
   },
 ];
 
@@ -80,6 +84,7 @@ function Atajos() {
             className="quick-card"
             onClick={() => openModal(item)}
           >
+            {item.icon}
             <h3 className="quick-card-title">{item.title}</h3>
             <p className="quick-card-desc">{item.description}</p>
           </div>

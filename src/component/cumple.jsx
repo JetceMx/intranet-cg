@@ -32,7 +32,7 @@ export default function Cumple({ collapsed }) {
     <header className={`cumple-header ${collapsed ? "collapsed" : ""}`}>
       <div>
         <h3>{saludo}</h3>
-        <p className="motivacion">{frase}</p>
+        <p className="motivaciones">{frase}</p>
       </div>
     </header>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import {User} from 'lucide-react';
+import { NavLink } from "react-router-dom";
 import '../Style/usuario.modules.css';
-
-// 5 - Codigo
 
 const frasesMotivacionales = [
   "¡Hoy es un buen día para aprender algo nuevo!",
@@ -30,10 +30,18 @@ export default function UserHeader({ collapsed }) {
 
   return (
     <header className={`user-header ${collapsed ? "collapsed" : ""}`}>
-      <div>
-        <h2>{saludo}</h2>
-        <p className="motivacion">{frase}</p>
+      <div className="user-header-left">
+        <h2 className="saludo">{saludo}</h2>
+        <p className="motivacion">"{frase}"</p>
+      </div>
+
+      <div className="user-header-right">
+        <NavLink to="/login" className="login-placeholder">
+          <User size={20} />
+          Iniciar Sesión
+        </NavLink>
       </div>
     </header>
   );
 }
+
