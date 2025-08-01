@@ -3,6 +3,9 @@ import {User} from 'lucide-react';
 import { NavLink } from "react-router-dom";
 import '../Style/usuario.modules.css';
 
+// 5 - Codigo
+
+
 const frasesMotivacionales = [
   "¡Hoy es un buen día para aprender algo nuevo!",
   "Recuerda: cada paso te acerca a tu meta.",

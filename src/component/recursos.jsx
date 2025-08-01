@@ -8,7 +8,7 @@ export default function Recursos() {
 
       <div className="centro-grid">
 
-        {/* Manuales */}
+        {/* 13 - codigo */}
         <section className="recurso-seccion">
           <h3>Manuales</h3>
           <ul className="archivo-lista">
@@ -25,7 +25,7 @@ export default function Recursos() {
           </ul>
         </section>
 
-        {/* Reglamento */}
+        
         <section className="recurso-seccion">
           <h3>Reglamentos</h3>
           <ul className="archivo-lista">
@@ -42,7 +42,7 @@ export default function Recursos() {
           </ul>
         </section>
 
-        {/* Políticas */}
+      
         <section className="recurso-seccion">
           <h3>Políticas</h3>
           <ul className="archivo-lista">
@@ -59,7 +59,7 @@ export default function Recursos() {
           </ul>
         </section>
 
-        {/* Formatos (futura sección) */}
+        {/* 13.1 - Codigo */}
         <section className="recurso-seccion deshabilitada">
           <h3>Formatos (Próximamente)</h3>
           <p>Muy pronto podrás descargar formatos para vacaciones, permisos, etc.</p>

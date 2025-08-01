@@ -5,6 +5,8 @@ import { useAuth } from "../context/context";
 
 const Login = () => {
 
+  /* 15 - Codigo */ 
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -13,6 +15,8 @@ const Login = () => {
     login(); // Simula login
     navigate("/"); // Redirige al inicio
   };
+
+  /* 14 - Codigo */
 
   return (
     <div className={styles.container}>
