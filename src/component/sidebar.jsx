@@ -2,16 +2,26 @@ import { Home, FileText, LogOut, Menu, HatGlasses, Handshake } from "lucide-reac
 import "../Style/sidebar.modules.css";
 import Carnes from "../imgs/Carnes G.png";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/context";
 
 // Enlaces de navegación
-const navItems = [
-  { icon: <Home size={20} />, label: "Inicio", link: '/' },
-  { icon: <FileText size={20} />, label: "Documentos", link: "/documentos" },
-  { icon: <Handshake size={20} />, label: "Mis Solicitudes", link: "/solicitudes" },
-  { icon: <HatGlasses size={20} />, label: "Denuncias", link: "/denuncias" },
-];
 
 export default function Sidebar({ collapsed, setCollapsed }) {
+
+  const { isLoggedIn, logout } = useAuth(); // Usar la sesión
+
+  // Enlaces base
+  const navItems = [
+    { icon: <Home size={20} />, label: "Inicio", link: "/" },
+    { icon: <FileText size={20} />, label: "Documentos", link: "/documentos" },
+  ];
+
+  // Enlaces protegidos
+  const privateItems = [
+    { icon: <Handshake size={20} />, label: "Mis Solicitudes", link: "/solicitudes" },
+    { icon: <HatGlasses size={20} />, label: "Denuncias", link: "/denuncias" },
+  ];
+
   return (
     <aside className={`sidebar ${collapsed ? "collapsed" : ""}`}>
       <div className="sidebar-header">
@@ -26,7 +36,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
       </div>
 
       <nav className="sidebar-nav">
-        {navItems.map((item, i) => (
+         {[...navItems, ...(isLoggedIn ? privateItems : [])].map((item, i) => (
           <NavLink
             to={item.link}
             key={i}
@@ -41,7 +51,7 @@ export default function Sidebar({ collapsed, setCollapsed }) {
       </nav>
 
       <div className="sidebar-footer">
-        <div className="nav-item logout">
+        <div className="nav-item logout"  onClick={logout}>
           <LogOut size={20} />
           {!collapsed && <span>Cerrar Sesión</span>}
         </div>

@@ -1,11 +1,22 @@
 import React from "react";
 import styles from "../Style/sesion.module.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/context";
 
 const Login = () => {
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login(); // Simula login
+    navigate("/"); // Redirige al inicio
+  };
+
   return (
     <div className={styles.container}>
-      <form className={styles.loginBox}>
+      <form className={styles.loginBox} onSubmit={handleSubmit}>
         <h2 className={styles.title}>Iniciar Sesión</h2>
 
         <div className={styles.inputGroup}>

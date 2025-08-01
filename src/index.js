@@ -4,14 +4,15 @@ import './index.css';
 import App from './App';
 import {BrowserRouter} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from "./context/context";
 
 // 8 - Codigo
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter>
-
-    <App />
-  
+ <BrowserRouter>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </BrowserRouter>
 
 )
