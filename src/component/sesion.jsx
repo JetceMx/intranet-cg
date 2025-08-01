@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Style/sesion.module.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { /*NavLink , */ useNavigate } from "react-router-dom";
 import { useAuth } from "../context/context";
 
 const Login = () => {
@@ -33,9 +33,13 @@ const Login = () => {
           Entrar
         </button>
 
+      {/*
         <p className={styles.helperText}>
           ¿No tienes cuenta? <NavLink to="/register">Regístrate</NavLink>
         </p>
+        
+        */}
+
       </form>
     </div>
   );
