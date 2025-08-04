@@ -5,6 +5,7 @@ import App from './App';
 import {BrowserRouter} from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from "./context/context";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // 8 - Codigo
 

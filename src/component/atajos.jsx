@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {FileUser, BookOpenText, UserStar} from "lucide-react";
-import "../Style/atajos.modules.css";
+import style from "../Style/atajos.module.css";
 
 const shortcuts = [
   {
@@ -75,31 +75,31 @@ function Atajos() {
   // 11 - Codigo
 
   return (
-    <div className="quick-links-container">
-      <h2 className="quick-links-title"> Atajos Rápidos</h2>
-      <div className="quick-links-grid">
+    <div className= {style.quicklinkscontainer}>
+      <h2 className={style.quicklinkstitle}> Atajos Rápidos</h2>
+      <div className={style.quicklinksgrid}>
         {shortcuts.map((item) => (
           <div
             key={item.id}
-            className="quick-card"
+            className={style.cardmain}
             onClick={() => openModal(item)}
           >
             {item.icon}
-            <h3 className="quick-card-title">{item.title}</h3>
-            <p className="quick-card-desc">{item.description}</p>
+            <h3 className={style.cardtitle}>{item.title}</h3>
+            <p className={style.carddesc}>{item.description}</p>
           </div>
         ))}
       </div>
 
       {activeShortcut && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>×</button>
+        <div className={style.modaloverlay} onClick={closeModal}>
+          <div className={style.modalcontent} onClick={(e) => e.stopPropagation()}>
+            <button className={style.modalclose} onClick={closeModal}>×</button>
             <h3>{activeShortcut.title}</h3>
 
             <div className="modal-actions">
               <button
-                className="download-btn"
+                className={style.downloadbtn}
                 onClick={() =>
                   downloadFile(activeShortcut.file, `${activeShortcut.title}.txt`)
                 }

@@ -4,6 +4,7 @@ import UserHeader from '../component/usuario';
 import News from '../component/news';
 import Cumple from '../component/cumple';
 import Atajos from '../component/atajos';
+import Footer from '../component/footer';
 import '../Style/home.modules.css';
 
 function Home() {
@@ -30,9 +31,12 @@ function Home() {
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className={`main-content ${collapsed ? "collapsed" : ""}`}>
         <UserHeader collapsed={collapsed} />
+        <br/>
         <News collapsed={collapsed} />
-        <Atajos collapsed={collapsed}/>        
+        <Atajos collapsed={collapsed}/>
+        <br/>        
         <Cumple collapsed={collapsed} />
+        <Footer collapsed={collapsed}/>
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Sidebar from '../component/sidebar';
 import UserHeader from '../component/usuario';
 import Recursos from '../component/recursos';
 import Cumple from '../component/cumple';
+import Footer from '../component/footer';
 import '../Style/documentos.modules.css';
 
 function Docs() {
@@ -28,8 +29,10 @@ function Docs() {
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className={`main-content ${collapsed ? "collapsed" : ""}`}>
         <UserHeader collapsed={collapsed} />
-        {<Recursos collapsed={collapsed} />}     
+        <Recursos collapsed={collapsed} />    
+        <br/> 
         <Cumple collapsed={collapsed} />
+        <Footer collapsed={collapsed}/>
       </div>
     </div>
   );
