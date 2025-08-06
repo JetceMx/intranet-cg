@@ -1,22 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../Style/sesion.module.css";
-import { /*NavLink , */ useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/context";
 
 const Login = () => {
-
-  /* 15 - Codigo */ 
-
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    login(); // Simula login
-    navigate("/"); // Redirige al inicio
-  };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  /* 14 - Codigo */
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        setError(data.message || "Error al iniciar sesión");
+        return;
+      }
+
+      const data = await response.json();
+      // Aquí asumo que tu contexto login acepta token y usuario
+      login(data.token, data.user);
+
+      navigate("/");
+    } catch (err) {
+      setError("Error de conexión");
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -25,25 +45,33 @@ const Login = () => {
 
         <div className={styles.inputGroup}>
           <label htmlFor="email">Correo electrónico</label>
-          <input type="email" id="email" placeholder="tucorreo@ejemplo.com" required/>
+          <input
+            type="email"
+            id="email"
+            placeholder="tucorreo@ejemplo.com"
+            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
 
         <div className={styles.inputGroup}>
           <label htmlFor="password">Contraseña</label>
-          <input type="password" id="password" placeholder="●●●●●●●●" required />
+          <input
+            type="password"
+            id="password"
+            placeholder="●●●●●●●●"
+            required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
+
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <button type="submit" className={styles.loginButton}>
           Entrar
         </button>
-
-      {/*
-        <p className={styles.helperText}>
-          ¿No tienes cuenta? <NavLink to="/register">Regístrate</NavLink>
-        </p>
-        
-        */}
-
       </form>
     </div>
   );
