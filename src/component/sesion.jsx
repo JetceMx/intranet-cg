@@ -1,19 +1,39 @@
 import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 import styles from "../Style/sesion.module.css";
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/context";
 
 const Login = () => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
-
+  const { login, isLoggedIn, loading } = useAuth();
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Si ya está logueado, redirigir a home
+  if (!loading && isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+
+  // Si está cargando, mostrar spinner
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '100vh' 
+      }}>
+        Cargando...
+      </div>
+    );
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setIsSubmitting(true);
 
     try {
       console.log('Email:', email, 'Password:', password);
@@ -30,12 +50,15 @@ const Login = () => {
       }
 
       const data = await response.json();
-      // Aquí asumo que tu contexto login acepta token y usuario
+      
+      // El login del contexto ya maneja la navegación
       login(data.token, data.user);
-
-      navigate("/");
+      
     } catch (err) {
       setError("Error de conexión");
+      console.error('Error de login:', err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -53,6 +76,7 @@ const Login = () => {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            disabled={isSubmitting}
           />
         </div>
 
@@ -65,13 +89,26 @@ const Login = () => {
             required
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={isSubmitting}
           />
         </div>
 
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && (
+          <p style={{ 
+            color: "red", 
+            textAlign: "center", 
+            marginTop: "10px" 
+          }}>
+            {error}
+          </p>
+        )}
 
-        <button type="submit" className={styles.loginButton}>
-          Entrar
+        <button 
+          type="submit" 
+          className={styles.loginButton}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Entrando..." : "Entrar"}
         </button>
       </form>
     </div>
