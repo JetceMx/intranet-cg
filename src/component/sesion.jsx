@@ -16,6 +16,7 @@ const Login = () => {
     setError("");
 
     try {
+      console.log('Email:', email, 'Password:', password);
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
