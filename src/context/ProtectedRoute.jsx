@@ -6,7 +6,6 @@ const ProtectedRoute = ({ children }) => {
   const { isLoggedIn, loading } = useAuth();
   const location = useLocation();
 
-  // Si está cargando, puedes mostrar un spinner
   if (loading) {
     return (
       <div style={{ 

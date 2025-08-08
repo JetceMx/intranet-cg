@@ -3,12 +3,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #f45c5c, #f84646);
+  background: linear-gradient(135deg, #b6b5b5, #ef0909);
   font-family: "Segoe UI", sans-serif;
 }
 
 .loginBox {
-  background-color: rgb(250, 194, 194);
+  background-color: rgb(213, 176, 176);
   padding: 2rem ;
   border-radius: 1rem;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);

@@ -1,6 +1,6 @@
 .sidebar {
   width: 250px;
-  background-color: #1f2937;
+  background-color: #e12828;
   color: white;
   height: 100vh;
   display: flex;
@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: #111827;
+  background-color: #c41d1d;
 }
 
 .logo {
@@ -51,7 +51,7 @@
 }
 
 .nav-item:hover {
-  background-color: #374151;
+  background-color: #d4b5b5;
 }
 
 .sidebar-footer {
@@ -60,7 +60,7 @@
 }
 
 .logout {
-  color: #f87171;
+  color: #ffffff;
 }
 
 .sidebar-nav .nav-item {
@@ -73,12 +73,12 @@
 }
 
 .sidebar-nav .nav-item:hover {
-  background-color: #374151;
+  background-color: #949ba5;
   color: #f3f4f6;
 }
 
 .sidebar-nav .nav-item.active {
-  background-color: #4b5563;
+  background-color: #c6c8cc;
   color: white;
 }
 

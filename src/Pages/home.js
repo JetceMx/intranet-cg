@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Sidebar from '../component/sidebar';
 import UserHeader from '../component/usuario';
-import News from '../component/news';
+//import News from '../component/news';
 import Cumple from '../component/cumple';
 import Atajos from '../component/atajos';
 import Footer from '../component/footer';
+import Carousel from '../component/carousel';
+import slides from '../component/noticias';
 import '../Style/home.modules.css';
 
 function Home() {
@@ -32,7 +34,8 @@ function Home() {
       <div className={`main-content ${collapsed ? "collapsed" : ""}`}>
         <UserHeader collapsed={collapsed} />
         <br/>
-        <News collapsed={collapsed} />
+        {/*<News collapsed={collapsed} />*/}
+        <Carousel collapsed={collapsed} slides={slides}/>
         <Atajos collapsed={collapsed}/>
         <br/>        
         <Cumple collapsed={collapsed} />

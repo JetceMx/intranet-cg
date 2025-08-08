@@ -1,5 +1,5 @@
 .cumple-header {
-  background-color: #e03535;
+  background: linear-gradient(135deg, #d1b3b3, #eb0606);
   padding: 2rem;
   border-bottom: 1px solid #c0c1c5;
   transition: margin-left 0.3s;

@@ -3,30 +3,32 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const { Connection, Request, TYPES } = require('tedious');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const app = express();
-const PORT = 5000;
-const SECRET_KEY = 'i3kJM3jYjWX3Z9dtJPnn51oPbZ82gb';
+const PORT = process.env.PORT; 
+const SECRET_KEY = process.env.JWT_SECRET;
 
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
 // Configuración de conexión a SQL Server
+
 const dbConfig = {
-  server: "DESKTOP-UB7IMQF\\SQLSERVER",
+  server: process.env.DB_SERVER,
   authentication: {
     type: 'default',
     options: {
-      userName: "sa",
-      password: "ABC123#"
+      userName: process.env.DB_USER,
+      password: process.env.DB_PASSWORD
     }
   },
   options: {
-    database: "CarnesG",
+    database: process.env.DB_DATABASE,
     trustServerCertificate: true,
     encrypt: false,
-    port: 14330
+    port: parseInt(process.env.DB_PORT, 10)  // ← Cambiado: agregado parseInt
   }
 };
 
