@@ -8,7 +8,7 @@ import { useAuth } from "../context/context";
 
 export default function Sidebar({ collapsed, setCollapsed }) {
 
-  const { isLoggedIn, logout } = useAuth(); // Usar la sesión
+  const { /*isLoggedIn,*/ logout } = useAuth(); // Usar la sesión
 
   // Enlaces base
   const navItems = [
@@ -36,7 +36,8 @@ export default function Sidebar({ collapsed, setCollapsed }) {
       </div>
 
       <nav className="sidebar-nav">
-         {[...navItems, ...(isLoggedIn ? privateItems : [])].map((item, i) => (
+         {/*{[...navItems, ...(isLoggedIn ? privateItems : [])].map((item, i) => (*/}
+         {[...navItems, ...privateItems].map((item, i) => (
           <NavLink
             to={item.link}
             key={i}

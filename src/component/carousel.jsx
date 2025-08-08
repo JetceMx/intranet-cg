@@ -4,7 +4,7 @@ import styles from "../Style/carousel.module.css";
 const Carousel = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Cambia cada 6 segundos
+  // Cambia cada 7 segundos
   useEffect(() => {
     const interval = setInterval(() => {
       goToNext();

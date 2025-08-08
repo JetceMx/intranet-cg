@@ -7,6 +7,7 @@ import Atajos from '../component/atajos';
 import Footer from '../component/footer';
 import Carousel from '../component/carousel';
 import slides from '../component/noticias';
+import Presentacion from '../component/presentacion';
 import '../Style/home.modules.css';
 
 function Home() {
@@ -35,6 +36,7 @@ function Home() {
         <UserHeader collapsed={collapsed} />
         <br/>
         {/*<News collapsed={collapsed} />*/}
+        <Presentacion collapsed={collapsed}/>
         <Carousel collapsed={collapsed} slides={slides}/>
         <Atajos collapsed={collapsed}/>
         <br/>        

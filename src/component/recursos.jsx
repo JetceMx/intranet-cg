@@ -1,7 +1,13 @@
 import { FileDown } from "lucide-react";
 import "../Style/recursos.modules.css";
+import { useAuth } from "../context/context";
+
+
 
 export default function Recursos() {
+
+  const { isLoggedIn, loading } = useAuth(); //Este es para obtener el contexto pero no se si se hace asi
+
   return (
     <div className="centro-container">
       <h2 className="centro-title">Centro de Recursos</h2>
