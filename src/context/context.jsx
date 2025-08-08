@@ -7,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [loading, setLoading] = useState(true); // Para mostrar loading inicial
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -23,27 +23,32 @@ export const AuthProvider = ({ children }) => {
         setUser(parsedUser);
         setIsLoggedIn(true);
       } catch (error) {
-        // Si hay error al parsear, limpiar localStorage
+        console.error('Error al parsear usuario guardado:', error);
         localStorage.removeItem('token');
         localStorage.removeItem('user');
       }
     }
     
-    setLoading(false); // Terminar loading
+    setLoading(false);
   }, []);
 
   const login = (newToken, newUser) => {
+    // Asegurar que el usuario tenga rol y área
+    const userWithDefaults = {
+      ...newUser,
+      rol: newUser.rol || 'empleado',
+      area: newUser.area || 'general'
+    };
+
     setToken(newToken);
-    setUser(newUser);
+    setUser(userWithDefaults);
     setIsLoggedIn(true);
     
-    // Guardar en localStorage para persistencia
     localStorage.setItem('token', newToken);
-    localStorage.setItem('user', JSON.stringify(newUser));
+    localStorage.setItem('user', JSON.stringify(userWithDefaults));
     
-    console.log('✅ Usuario logueado:', newUser);
+    console.log('✅ Usuario logueado:', userWithDefaults);
     
-    // Redirigir a donde estaba intentando ir, o a home
     const intendedDestination = location.state?.from?.pathname || '/';
     navigate(intendedDestination, { replace: true });
   };
@@ -53,7 +58,6 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setIsLoggedIn(false);
     
-    // Limpiar localStorage
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     
@@ -61,7 +65,7 @@ export const AuthProvider = ({ children }) => {
     navigate('/login');
   };
 
-  // Función para verificar si el token está expirado (opcional)
+  // Función para verificar si el token está expirado
   const isTokenExpired = (token) => {
     if (!token) return true;
     
@@ -74,6 +78,38 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Función para verificar si el usuario tiene un rol específico
+  const hasRole = (role) => {
+    return user?.rol === role;
+  };
+
+  // Función para verificar si el usuario pertenece a un área específica
+  const hasArea = (area) => {
+    return user?.area === area;
+  };
+
+  // Función para verificar si el usuario tiene acceso a un recurso
+  const hasAccess = (requiredRoles = [], requiredAreas = []) => {
+    if (!isLoggedIn || !user) return false;
+    
+    const hasRequiredRole = requiredRoles.length === 0 || 
+                           requiredRoles.includes('todos') || 
+                           requiredRoles.includes(user.rol);
+    
+    const hasRequiredArea = requiredAreas.length === 0 || 
+                           requiredAreas.includes('todas') || 
+                           requiredAreas.includes(user.area);
+    
+    return hasRequiredRole && hasRequiredArea;
+  };
+
+  // Función para actualizar información del usuario
+  const updateUser = (newUserData) => {
+    const updatedUser = { ...user, ...newUserData };
+    setUser(updatedUser);
+    localStorage.setItem('user', JSON.stringify(updatedUser));
+  };
+
   const value = {
     isLoggedIn,
     user,
@@ -81,7 +117,11 @@ export const AuthProvider = ({ children }) => {
     loading,
     login,
     logout,
-    isTokenExpired
+    isTokenExpired,
+    hasRole,
+    hasArea,
+    hasAccess,
+    updateUser
   };
 
   return (

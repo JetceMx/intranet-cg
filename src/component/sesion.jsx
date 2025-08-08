@@ -36,27 +36,42 @@ const Login = () => {
     setIsSubmitting(true);
 
     try {
-      console.log('Email:', email, 'Password:', password);
+      console.log('📧 Email enviado:', email);
+      console.log('🔐 Password enviado:', password);
+      
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+      console.log('📥 Respuesta del servidor:', data);
+
       if (!response.ok) {
-        const data = await response.json();
         setError(data.message || "Error al iniciar sesión");
+        console.error('❌ Error en login:', data);
         return;
       }
 
-      const data = await response.json();
+      // Verificar que la respuesta tenga la estructura esperada
+      if (!data.token || !data.user) {
+        console.error('❌ Respuesta incompleta:', data);
+        setError("Error en la respuesta del servidor");
+        return;
+      }
+
+      console.log('✅ Login exitoso:', {
+        token: data.token ? 'Presente' : 'Ausente',
+        user: data.user
+      });
       
-      // El login del contexto ya maneja la navegación
+      // El login del contexto maneja la navegación automáticamente
       login(data.token, data.user);
       
     } catch (err) {
-      setError("Error de conexión");
-      console.error('Error de login:', err);
+      setError("Error de conexión con el servidor");
+      console.error('❌ Error de conexión:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -97,7 +112,11 @@ const Login = () => {
           <p style={{ 
             color: "red", 
             textAlign: "center", 
-            marginTop: "10px" 
+            marginTop: "10px",
+            backgroundColor: "#ffebee",
+            padding: "10px",
+            borderRadius: "4px",
+            border: "1px solid #ffcdd2"
           }}>
             {error}
           </p>
@@ -110,6 +129,8 @@ const Login = () => {
         >
           {isSubmitting ? "Entrando..." : "Entrar"}
         </button>
+        
+        {/* Panel de información de desarrollo (puedes quitarlo en producción) */}
       </form>
     </div>
   );
