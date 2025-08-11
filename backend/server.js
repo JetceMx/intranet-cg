@@ -359,10 +359,13 @@ app.post('/api/auth/logout', verifyToken, (req, res) => {
 // Iniciar servidor
 app.listen(PORT, () => {
   console.log(`🚀 Backend corriendo en http://localhost:${PORT}`);
+  /*
   console.log(`📋 Rutas disponibles:`);
   console.log(`   POST /api/auth/login`);
   console.log(`   GET  /api/auth/me`);
   console.log(`   GET  /api/recursos`);
   console.log(`   POST /api/auth/logout`);
   console.log(`   GET  /api/debug/usuarios`);
+  */
+
 });
