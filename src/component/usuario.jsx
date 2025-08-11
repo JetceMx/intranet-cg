@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import {User} from 'lucide-react';
+import { User } from 'lucide-react';
 import { NavLink } from "react-router-dom";
 import '../Style/usuario.modules.css';
-
-// 5 - Codigo
-
+import { useAuth } from "../context/context";
 
 const frasesMotivacionales = [
   "¡Hoy es un buen día para aprender algo nuevo!",
@@ -22,14 +20,27 @@ function getSaludoPorHora() {
 }
 
 export default function UserHeader({ collapsed }) {
+
   const [frase, setFrase] = useState("");
   const [saludo, setSaludo] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     setSaludo(getSaludoPorHora());
     const aleatorio = frasesMotivacionales[Math.floor(Math.random() * frasesMotivacionales.length)];
     setFrase(aleatorio);
+    
+    // Verificar si hay un usuario autenticado
+    checkAuthStatus();
   }, []);
+
+  const checkAuthStatus = () => {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+    
+  };
 
   return (
     <header className={`user-header ${collapsed ? "collapsed" : ""}`}>
@@ -39,12 +50,22 @@ export default function UserHeader({ collapsed }) {
       </div>
 
       <div className="user-header-right">
-        <NavLink to="/login" className="login-placeholder">
-          <User size={20} />
-          Iniciar Sesión
-        </NavLink>
+        {user ? (
+          // Usuario autenticado - mostrar nombre
+          <div className="user-info">
+            <div className="user-profile">
+              <User size={20} />
+              <span className="user-name">{user.nombre || user.email}</span>
+            </div>
+          </div>
+        ) : (
+          // Usuario no autenticado - mostrar enlace de inicio de sesión
+          <NavLink to="/login" className="login-placeholder">
+            <User size={20} />
+            Iniciar Sesión
+          </NavLink>
+        )}
       </div>
     </header>
   );
 }
-

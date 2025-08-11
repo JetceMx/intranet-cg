@@ -50,3 +50,14 @@
   transition: background-color 0.3s ease-in-out;
 }
 
+.user-profile {
+  align-items: center;
+  gap: 8px;
+  color: #c0bfbf;
+  font-weight: 500;
+}
+
+.user-name {
+  font-size: 14px;
+  color: #ffffff;
+}
