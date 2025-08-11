@@ -10,10 +10,10 @@
 
 #Variables de entorno
 .env
-
 /.env.*
 /backend/.env
 /backend/.env.*
+
 # production
 /build
 
