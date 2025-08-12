@@ -248,6 +248,7 @@ app.get('/api/auth/me', verifyToken, (req, res) => {
   connection.connect();
 });
 
+
 // Ruta para obtener todos los recursos con filtros (protegida)
 app.get('/api/recursos', verifyToken, (req, res) => {
   const connection = new Connection(dbConfig);
@@ -299,6 +300,7 @@ app.get('/api/recursos', verifyToken, (req, res) => {
   connection.connect();
 });
 
+
 // Ruta para verificar la estructura de la tabla (solo para debug)
 app.get('/api/debug/usuarios', (req, res) => {
   const connection = new Connection(dbConfig);
@@ -349,6 +351,67 @@ app.get('/api/debug/usuarios', (req, res) => {
   
   connection.connect();
 });
+
+
+// Ruta para obtener usuarios que cumplen años el dia actual
+app.get("/api/cumple-hoy", (req, res) => {
+  const connection = new Connection(dbConfig);
+
+  connection.on("connect", (err) => {
+    if (err) {
+      console.error("❌ Error al conectar:", err.message);
+      return res.status(500).json({ error: "Error de conexión" });
+    }
+
+    const hoy = new Date();
+    const dia = hoy.getDate();
+    const mes = hoy.getMonth() + 1;
+
+    console.log(`📅 Buscando cumpleaños para el día ${dia} / ${mes}`);
+
+    const sql = `
+      SELECT Nombre, FechaNacimiento
+      FROM Usuarios
+      WHERE DAY(FechaNacimiento) = @dia
+        AND MONTH(FechaNacimiento) = @mes
+    `;
+
+    const cumpleanieros = [];
+
+    const request = new Request(sql, (err) => {
+      connection.close();
+
+      if (err) {
+        console.error("❌ Error en consulta:", err.message);
+        return res.status(500).json({ error: "Error en consulta" });
+      }
+
+      console.log(`✅ Total cumpleaños encontrados: ${cumpleanieros.length}`);
+      res.json({
+        tieneCumple: cumpleanieros.length > 0,
+        nombres: cumpleanieros.map(c => c.Nombre),
+        detalles: cumpleanieros // 👈 Esto es solo para debug
+      });
+    });
+
+    request.on("row", (columns) => {
+      const persona = {};
+      columns.forEach(col => {
+        persona[col.metadata.colName] = col.value;
+      });
+      console.log("🎯 Cumpleañero encontrado:", persona);
+      cumpleanieros.push(persona);
+    });
+
+    request.addParameter("dia", TYPES.Int, dia);
+    request.addParameter("mes", TYPES.Int, mes);
+    connection.execSql(request);
+  });
+
+  connection.connect();
+});
+
+
 
 // Ruta para logout (opcional)
 app.post('/api/auth/logout', verifyToken, (req, res) => {

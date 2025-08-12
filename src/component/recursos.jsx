@@ -17,21 +17,21 @@ export default function Recursos() {
         {
           nombre: "Manual del Usuario",
           url: "/docs/manual-usuario.pdf",
-          roles: ["admin", "supervisor", "empleado"],
+          roles: ["administrador", "coordinador", "empleado"],
           areas: ["todas"],
           esPublico: true // Recurso público
         },
         {
           nombre: "Manual Técnico",
           url: "/docs/manual-tecnico.pdf",
-          roles: ["admin", "supervisor"],
-          areas: ["ti", "ingenieria"],
+          roles: ["administrador", "coordinador"],
+          areas: ["sistemas"],
           esPublico: false // Recurso privado
         },
         {
           nombre: "Manual de Procedimientos",
           url: "/docs/manual-procedimientos.pdf",
-          roles: ["admin", "supervisor"],
+          roles: ["administrador", "coordinador"],
           areas: ["todas"],
           esPublico: false // Recurso privado
         }
@@ -44,22 +44,22 @@ export default function Recursos() {
         {
           nombre: "Reglamento Interno",
           url: "/docs/reglamento-interno.pdf",
-          roles: ["admin", "supervisor", "empleado"],
+          roles: ["administrador", "coordinador", "empleado"],
           areas: ["todas"],
           esPublico: true // Recurso público
         },
         {
           nombre: "Reglamento de Seguridad",
           url: "/docs/reglamento-seguridad.pdf",
-          roles: ["admin", "supervisor", "empleado"],
+          roles: ["administrador", "coordinador", "empleado"],
           areas: ["todas"],
           esPublico: true // Recurso público
         },
         {
-          nombre: "Reglamento IT",
-          url: "/docs/reglamento-it.pdf",
-          roles: ["admin", "supervisor"],
-          areas: ["ti"],
+          nombre: "Reglamento TI",
+          url: "/docs/reglamento-ti.pdf",
+          roles: ["administrador", "coordinador"],
+          areas: ["sistemas"],
           esPublico: false // Recurso privado
         }
       ]
@@ -71,22 +71,22 @@ export default function Recursos() {
         {
           nombre: "Política de Privacidad",
           url: "/docs/politica-privacidad.pdf",
-          roles: ["admin", "supervisor", "empleado"],
+          roles: ["administrador", "coordinador", "empleado"],
           areas: ["todas"],
           esPublico: true // Recurso público
         },
         {
           nombre: "Política de Seguridad",
           url: "/docs/politica-seguridad.pdf",
-          roles: ["admin", "supervisor"],
+          roles: ["administrador", "coordinador"],
           areas: ["todas"],
           esPublico: false // Recurso privado
         },
         {
           nombre: "Política de RRHH",
           url: "/docs/politica-rrhh.pdf",
-          roles: ["admin", "supervisor"],
-          areas: ["rrhh"],
+          roles: ["administrador", "coordinador"],
+          areas: ["rh"],
           esPublico: false // Recurso privado
         }
       ]
@@ -98,22 +98,22 @@ export default function Recursos() {
         {
           nombre: "Formato de Vacaciones",
           url: "/docs/formato-vacaciones.pdf",
-          roles: ["admin", "supervisor", "empleado"],
+          roles: ["administrador", "coordinador", "empleado"],
           areas: ["todas"],
           esPublico: false // Recurso privado
         },
         {
           nombre: "Formato de Permisos",
           url: "/docs/formato-permisos.pdf",
-          roles: ["admin", "supervisor", "empleado"],
+          roles: ["administrador", "coordinador", "empleado"],
           areas: ["todas"],
           esPublico: false // Recurso privado
         },
         {
           nombre: "Formato de Evaluación",
           url: "/docs/formato-evaluacion.pdf",
-          roles: ["admin", "supervisor"],
-          areas: ["rrhh"],
+          roles: ["administrador", "coordinador"],
+          areas: ["rh"],
           esPublico: false // Recurso privado
         }
       ]
